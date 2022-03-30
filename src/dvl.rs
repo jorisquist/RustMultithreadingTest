@@ -3,30 +3,27 @@ use std::thread::sleep;
 use std::time::Duration;
 use crate::samples::SensorSample;
 
-pub struct PressureSensor {
-    frequency: f32,
+pub struct DVLClient {
 
 }
 
 #[derive(Debug)]
-pub struct PressureSample {
-    pressure: f32
+pub struct DVLSample {
+    velocity: [f32; 3]
 }
 
-impl PressureSensor {
-    pub fn new(frequency: f32) -> PressureSensor {
-        return PressureSensor { frequency };
+impl DVLClient {
+    pub fn new() -> DVLClient {
+        return DVLClient {};
     }
 
     pub fn start(self, sender: Sender<SensorSample>) {
         loop {
-            let sample = PressureSample { pressure: rand::random() };
+            let sample = DVLSample { velocity: [rand::random(), rand::random(), rand::random()] };
 
-            println!("Sending: {:?}", sample);
+            sender.send(SensorSample::DVL(sample));
 
-            sender.send(SensorSample::Pressure(sample));
-
-            sleep(Duration::from_millis((1000.0/self.frequency) as u64));
+            sleep(Duration::from_millis((3000) as u64));
         }
     }
 }
