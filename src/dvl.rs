@@ -1,4 +1,5 @@
-use std::sync::mpsc::Sender;
+use crossbeam::Sender;
+// use std::sync::mpsc::Sender;
 use std::thread::sleep;
 use std::time::Duration;
 use crate::samples::SensorSample;

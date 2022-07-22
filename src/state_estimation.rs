@@ -1,4 +1,5 @@
-use std::sync::mpsc::Receiver;
+use crossbeam::Receiver;
+// use std::sync::mpsc::Receiver;
 use crate::imu::IMUSample;
 use crate::samples::SensorSample;
 
